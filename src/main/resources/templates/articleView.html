@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts\layout.html}">
+<head>
+    <title>Article Management System</title>
+</head>
+<body>
+    <div layout:fragment="custom-content">
+            <div style="text-align: center">
+                      <a href="/add" style="float: left;"><input class="btn btn-primary" type="button" th:value="#{insert.new.row}"></a></span>
+               <a th:href="@{/article/search/{search}(search='a')}" style="float: right;"><input class="btn btn-primary" type="button" th:value="Search"></a>
+                    <h2 th:text="#{article.view.title}">Article List Here:</h2>
+
+            </div>
+            <table class="table table-bordered table-striped table-responsive">
+                <tr class="bg-success">
+                    <th th:text="#{article.id}" style="width: 5%;">ID</th>
+                    <th th:text="#{article.title}" style="width: 10%;">Title</th>
+                    <th style="width: 10%;" th:text="#{category}">Category</th>
+                    <th th:text="#{article.description}" style="width: 15%;">Description</th>
+                    <th th:text="#{article.author}" style="width: 10%;">Author</th>
+                    <th th:text="#{article.thubmnail}" style="width: 10%;">Thumbnail</th>
+                    <th th:text="#{article.date}" style="width:10%;">Created Date</th>
+                    <th th:text="#{article.action}" style="width: 30%;">Action on record</th>
+                </tr>
+                <tr th:each="article : ${articleList}" th:object="${article}">
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{title}"></td>
+                    <td th:text="*{category.getCategory()}"></td>
+                    <td th:text="*{description}"></td>
+                    <td th:text="*{author}"></td>
+                    <td><img style="width: 100px; height:100px" th:src="*{thumbnail}" alt=""></td>
+                    <td th:text="*{createdDate}"></td>
+                    <td><a th:href="@{/viewOne/{id}(id=*{id})}"><input class="btn btn-primary" type="button" th:value="#{view}"/></a>
+                        <a th:href="@{/edit/{id}(id=*{id})}"><input class="btn btn-success" type="button" th:value="#{update}"/></a>
+                        <a th:href="@{/delete/{id}(id=*{id})}"><input class="btn btn-danger" type="button" th:value="#{delete}"/></a>
+                    </td>
+                </tr>
+            </table>
+        <nav id="page">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link"th:href="@{/article/page/{id}(id=${prevPage})}">Previous</a>
+                </li>
+                <li class="page-item" th:each="a : ${#numbers.sequence(1,pageNum+1)}"><a class="page-link"  th:text="${a}" th:href="@{/article/page/{id}(id=${a})}">1</a></li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{/article/page/{id}(id=${nextPage})}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</body>
+
+</html>
