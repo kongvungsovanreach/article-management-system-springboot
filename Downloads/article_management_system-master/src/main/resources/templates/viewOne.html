@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts\layout.html}">
+<head>
+    <title>Article Management System</title>
+</head>
+<body>
+<div layout:fragment="custom-content">
+    <div style="text-align: center">
+        <a href="/article" style="float: left;"><input class="btn btn-primary" type="button" th:value="#{go.home}"></a>
+        <h2 th:text="#{view.one.article}">Article List Here:</h2>
+    </div>        <table class="table table-bordered table-striped" th:object="${obj}">
+            <tr>
+                <td th:text="#{article.id}">ID</td>
+                <td  th:text="*{id}"></td>
+            </tr>        <tr>
+            <td th:text="#{article.title}">Title</td>
+            <td  th:text="*{title}"></td>
+        </tr>        <tr>
+            <td th:text="#{article.description}">Description</td>
+            <td  th:text="*{description}"></td>
+        </tr>        <tr>
+            <td th:text="#{article.author}">Author</td>
+            <td th:text="*{author}"></td>
+        </tr>        <tr>
+            <td  th:text="#{article.date}">Created Date</td>
+            <td th:text="*{createdDate}"></td>
+        </tr></tr>        <tr>
+            <td   th:text="#{article.thubmnail}">Thumbnail</td>
+            <td><img style="width: 200px;height: 200px;" th:src="*{thumbnail}" alt=""></td>
+        </tr>
+        </table>
+    </div>
+</body>
+</html>
