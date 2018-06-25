@@ -23,6 +23,7 @@ public interface ArticleRepository {
             @Result(property = "category.id", column = "cate_id"),
             @Result(property = "category.category", column = "cate_title")
     })
+    @Delete("Delete from tbl_articles where id=#{id}")
     void delete(int id);
     @Update("UPDATE tbl_articles SET  title=#{title}, description=#{description}, author=#{author}, thumbnail=#{thumbnail},  cate_id=#{category.id} where id=#{id}")
     void update(Article article);
